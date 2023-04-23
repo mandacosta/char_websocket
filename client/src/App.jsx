@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import './App.css'
 import { Join } from './components/join/Join'
 import { Chat } from './components/chat/Chat'
+import { GlobalStyle } from './styles/global'
 
 
 function App() {
@@ -11,13 +11,16 @@ function App() {
   const [messages, setMessages] = useState([])
 
   return (
-    <div className="App">
+    <>
+      <main className="App">
       {
       isLogged ? 
       <Chat userName={userName} setUserName={setUserName} socket={socket} messages={messages} setMessages={setMessages}/> : 
       <Join isLogged={isLogged} setIsLogged={setIsLogged} userName={userName} setUserName={setUserName} setSocket={setSocket}/>
       }
-    </div>
+    </main>
+    <GlobalStyle/>
+    </>
   )
 }
 
