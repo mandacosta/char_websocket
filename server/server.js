@@ -2,14 +2,14 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, {cors: {origin: 'http://localhost:5173'}})
 
-const PORT = 3001
+const PORT = 4009
 
 io.on('connection', socket => {
   console.log('Usuário conectado!', socket.id);
 
-  socket.on('username', username => {
-    socket.data.username = username
-    console.log(socket.data.username)
+  socket.on('userName', userName => {
+    socket.data.userName = userName
+    console.log(socket.data.userName)
   })
 
   socket.on('disconnect', reason => {
@@ -17,11 +17,12 @@ io.on('connection', socket => {
   })
 
   socket.on('message', text => {
-    io.emit('receive_message', {
+    socket.broadcast.emit('receive_message', {
       text,
-      author: {name: socket.data.username, id: socket.id}
+      author: {name: socket.data.userName, id: socket.id}
     })
   })
 })
+
 
 server.listen(PORT, () => console.log('Server running...'))

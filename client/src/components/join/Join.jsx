@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 import io from 'socket.io-client'
-import { StyledDiv } from './styled'
+import { StyledDiv } from './style'
 import img from "../../assets/join_chat.jpg"
 
 export const Join = ({isLogged, setIsLogged, userName, setUserName, setSocket}) => {
@@ -12,8 +12,8 @@ export const Join = ({isLogged, setIsLogged, userName, setUserName, setSocket}) 
     setIsLogged(true)
     console.log("Entrou")
 
-    const socket = await io.connect('http://localhost:3001')
-    socket.emit('username', userName)
+    const socket = await io.connect('http://localhost:4009')
+    socket.emit('userName', userName)
     setSocket(socket)
 
   }
